@@ -1,0 +1,15 @@
+---
+description: Архитектура monorepo и структура файлов проекта
+alwaysApply: true
+---
+
+# Правило #01: Соблюдение архитектуры
+
+- Структура проекта — monorepo согласно `docs/refactoring/monorepo.md`.
+- Файлы создаются только в разрешённых директориях: `apps/{app}/src/`, `packages/{pkg}/src/`.
+- Импорты через алиасы: `@config/*`, `@db/*`, `@shared/*`, `@auth/*`, `@core/*`.
+- Feature flags — в `packages/shared/src/constants/features.ts`.
+- Файлы >200 строк разделять.
+- Функции >50 строк рефакторить.
+- `any` запрещён — использовать `unknown` или конкретные типы.
+- Магические числа — в `/constants/` или `/packages/shared/src/constants/`.

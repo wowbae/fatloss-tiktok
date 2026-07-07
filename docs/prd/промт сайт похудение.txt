@@ -1,0 +1,23 @@
+Act as an expert frontend developer specializing in ultra-performance, mobile-first landing pages with premium minimalist aesthetics (Apple style).
+
+Task: Build a single-page website based on HTML, Tailwind CSS, and vanilla JavaScript. No React, no Vue, no heavy dependencies. Use Bun for project initialization if needed.
+
+Design Requirements:
+1. Mobile-First: The layout must be strictly optimized for mobile viewports (widths 360px to 430px). Desktop view should just be a centered mobile container with a clean background.
+2. Apple Aesthetic: Large bold typography (Inter or San Francisco system fonts), massive line-heights, high contrast, lots of whitespace (padding/margin). One screen (100vh) should ideally represent one core thought or section.
+3. Color Palette: Pure dark background (#000000) transitioning to clean white (#FFFFFF) for contrast blocks, with premium accents.
+4. Typography: Use `font-sans` with heavy weights (`font-black`, `font-bold`) for headings and crisp tracking (`tracking-tight`).
+
+Technical Requirements:
+1. Use Tailwind CSS via PostCSS/Bun setup.
+2. All images must support lazy loading and be styled object-cover.
+3. Implement smooth scroll-driven text fading effects using vanilla JS Intersection Observer API or a lightweight library like AOS.
+4. No external UI component libraries. Write clean, semantic HTML5.
+5. Provide the full code for index.html, tailwind.config.js, and the basic script for scroll animations.
+
+Structure to implement:
+- Block 1: Split-screen Intro (Before/After background) with huge bold heading, subheading, and a prominent sticky-ready CTA button.
+- Block 2: Dark mode emotional pain points (3 short typography-focused phrases).
+- Block 3: Product presentation (Clean card with book mock-up).
+- Block 4: Bullet-points features with minimal icons.
+- Block 5: Final urgent CTA with a clean payment/action button.

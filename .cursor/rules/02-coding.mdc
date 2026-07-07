@@ -1,0 +1,76 @@
+---
+description: Стандарты TypeScript, именования и стиль кода
+globs: "**/*.{ts,tsx}"
+alwaysApply: true
+---
+
+# Правило #02: Стандарты кодирования
+
+## TypeScript
+
+- Строгий режим (`strict: true`)
+- Интерфейсы вместо типов для объектов
+- Const-объекты вместо enum
+- `any` запрещён — использовать `unknown` или конкретные типы
+- Generics там, где улучшает типобезопасность
+
+## Именование
+
+- English only, без транслита
+- `camelCase` — переменные и функции
+- `PascalCase` — типы, интерфейсы, классы
+- `UPPER_CASE` — константы
+- Переменные с глаголами (`isLoading`, `hasError`, `canDelete`)
+
+## Комментарии
+
+- На русском в ключевых местах
+- Объясняют «почему», не «что»
+- Без очевидных комментариев
+
+## Стиль
+
+- Функциональное программирование
+- Early returns
+- Happy path в конце
+- Max 50 строк/функция, max 200 строк/файл
+- Дизайн frontend строить только на переменных/токенах (цвета, радиусы, шрифты, отступы), без хардкода в компонентах
+
+## Логирование
+
+- Только наш логгер из `packages/shared/src/logging` — импорт: `import { logger } from '@shared/logging/logger'` или `import { logger } from '@shared/utils'`
+- Методы: `logger.debug`, `logger.info`, `logger.warn`, `logger.error`, `logger.errorWithStack`
+- Контекст передавать вторым аргументом: `logger.info('User created', { userId })`
+- Уровень в production управляется через `LOG_LEVEL` в env
+- Запрещены `console.log`, `console.info`, `console.warn`, `console.error`, `console.debug`
+
+## AI (OpenAI SDK)
+
+- Только нативный `openai` пакет — фабрика провайдеров в `packages/core/src/ai/providers/`
+- `createProvider(name)` → возвращает `{ client: OpenAI, model: string }`
+- Запрещены прямые fetch к AI API — только через `openai` SDK
+- Конфигурация провайдеров в `packages/config/src/ai.ts`
+
+## Bun (Bun runtime)
+
+- Используй встроенные Bun API вместо Node.js: `Bun.file()`, `Bun.write()`, `Bun.password`, `Bun.env`
+- Запрещены `fs`, `path`, `process.env` из Node.js при наличии Bun-аналогов
+- Для хеширования паролей — `Bun.password.hash()` / `Bun.password.verify()`
+- Для чтения/записи файлов — `Bun.file()` / `Bun.write()` вместо `fs`
+- Переменные окружения — через `Bun.env` вместо `process.env`
+
+## Prisma (ORM)
+
+- Любые изменения данных — только через Prisma Client
+- Запрещены сырые SQL-запросы (кроме случаев критической оптимизации, и только с согласования)
+- Типы моделей БД всегда импортировать из `@db/*`, не хардкодить вручную
+- Миграции — только через `bun run db:migrate`, без прямых изменений схемы в обход Prisma
+
+## Запрещено
+
+- Redux, MobX — только TanStack Query
+- `console.*` для логирования — только `@shared/logging`
+- Игнорирование ошибок
+- Hardcoded secrets — через `.env`
+- Циклические зависимости
+- Прямые fetch к AI API

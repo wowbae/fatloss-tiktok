@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+|
+|Используй официальную документацию Telegam API: `https://core.telegram.org/bots/api` и библиотеку grammyJS: `https://grammy.dev/ref/`
+|
+|## Типизация бота
+|
+|- Контекст бота (`ctx`) всегда строго типизировать: `Context & SessionFlavor<SessionData>`
+|- Не оставлять `ctx` нетипизированным — модель начнёт выдумывать методы на ходу
+|- Сессию добавлять через `SessionFlavor` из `grammy`

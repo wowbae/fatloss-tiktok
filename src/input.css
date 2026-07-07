@@ -1,0 +1,12 @@
+/* ═══════════════════════════════════════
+   v2 Redesign styles (imports first)
+   ═══════════════════════════════════════ */
+@import "./styles/base.css";
+@import "./styles/components.css";
+
+/* ═══════════════════════════════════════
+   Tailwind layers
+   ═══════════════════════════════════════ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

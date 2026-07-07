@@ -1,0 +1,147 @@
+/* === v2 Custom Properties === */
+:root {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --elevated: #1e1e1e;
+  --text: #eae6df;
+  --text-dim: #9e9890;
+  --text-muted: #6b6560;
+  --warm: #c9a97a;
+  --ember: #d47b4a;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-light: rgba(255, 255, 255, 0.10);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --pad: clamp(1.6rem, 7vw, 6.8rem);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  overscroll-behavior-y: none;
+}
+
+::selection {
+  background: rgba(201, 169, 122, 0.25);
+  color: var(--text);
+}
+
+/* === Background image wrapper === */
+.bg-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.bg-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+.bg-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.7) 0%,
+    rgba(10, 10, 10, 0.3) 40%,
+    rgba(10, 10, 10, 0.85) 100%
+  );
+}
+
+/* === Content wrapper === */
+.cwrap {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 480px);
+}
+
+/* === Section ambient glow === */
+.section-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+#hero.section-glow::before {
+  background:
+    radial-gradient(ellipse at 75% 25%, rgba(201, 169, 122, 0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(212, 123, 74, 0.08) 0%, transparent 40%);
+}
+#pain.section-glow::before {
+  background:
+    linear-gradient(90deg, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0.3) 60%, transparent 100%),
+    radial-gradient(ellipse at 70% 50%, rgba(201, 169, 122, 0.1) 0%, transparent 50%);
+}
+#product.section-glow::before {
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(201, 169, 122, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(212, 123, 74, 0.06) 0%, transparent 40%);
+}
+#features.section-glow::before {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(201, 169, 122, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 70%, rgba(212, 123, 74, 0.08) 0%, transparent 40%);
+}
+#final.section-glow::before {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(201, 169, 122, 0.15) 0%, transparent 50%);
+}
+
+/* === Reveal animations (blur + fade-up) === */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(4px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), filter 0.8s var(--ease);
+}
+[data-reveal].visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+[data-reveal]:nth-child(1) { transition-delay: 0.05s; }
+[data-reveal]:nth-child(2) { transition-delay: 0.12s; }
+[data-reveal]:nth-child(3) { transition-delay: 0.2s; }
+[data-reveal]:nth-child(4) { transition-delay: 0.28s; }
+[data-reveal]:nth-child(5) { transition-delay: 0.36s; }
+[data-reveal='slow'] { transition-duration: 1s; }
+[data-reveal='slow']:nth-child(1) { transition-delay: 0.1s; }
+[data-reveal='slow']:nth-child(2) { transition-delay: 0.35s; }
+
+/* === Scrollbar hide === */
+.scroll-hide {
+  scrollbar-width: none;
+}
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* === Floating island nav === */
+.nav-island {
+  background: rgba(20, 20, 20, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}

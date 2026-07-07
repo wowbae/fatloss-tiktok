@@ -1,0 +1,21 @@
+{
+  "name": "fat-loss-landing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Mobile-first лендинг для книги по похудению. Apple-минимализм, Баку.",
+  "scripts": {
+    "dev": "bunx tailwindcss -i src/input.css -o src/assets/styles.css --watch",
+    "build:css": "bunx tailwindcss -i src/input.css -o dist/assets/styles.css --minify",
+    "build:copy": "cp src/index.html dist/index.html && cp src/main.js dist/main.js && cp src/assets/bg-*.webp dist/assets/",
+    "build": "bun run build:css && bun run build:copy",
+    "clean": "rm -rf dist",
+    "preview": "bun run build && open dist/index.html"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "postcss-import": "^16.1.1",
+    "tailwindcss": "^3.4.17"
+  }
+}
