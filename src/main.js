@@ -34,7 +34,9 @@ const initStickyCta = () => {
   const showObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        sticky.classList.toggle('translate-y-full', entry.isIntersecting);
+        sticky.classList.toggle('opacity-0', entry.isIntersecting);
+        sticky.classList.toggle('translate-y-8', entry.isIntersecting);
+        sticky.classList.toggle('pointer-events-none', entry.isIntersecting);
       });
     },
     { threshold: 0.1 },
@@ -44,7 +46,9 @@ const initStickyCta = () => {
   const hideObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) sticky.classList.add('translate-y-full');
+        if (entry.isIntersecting) {
+          sticky.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+        }
       });
     },
     { threshold: 0.3 },
